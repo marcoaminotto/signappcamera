@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import api from '../services/api';
 
 import { View, TouchableOpacity, Text, StyleSheet, Image, Dimensions} from 'react-native';
 import { RNCamera } from 'react-native-camera';
@@ -22,16 +23,23 @@ export default class Camera extends Component {
   };
 
   upload = () => {
-    const body = new FormData();
+    const data = new FormData();
      //pegar a imagem da store e passar para o state
-     body.append('img', {uri: this.state.img.uri, name: 'img.png', type: 'image/png' });
-     fetch('http://192.168.1.200:3333/posts', {
+     let name = new Date().getTime();
+     data.append('image', {uri: this.state.img.uri, name: `${name}.png`, type: 'image/png' });
+     data.append('sign',null);
+     fetch('http://192.168.25.5:3333/posts', {
       method: 'post',
       headers: {
         'Content-Type': 'multipart/form-data'
       },
-      body
+      body: data
      }).then(a => a.json()).then(res => alert(res));
+  }
+
+  async componentDidMount() {
+      const response = await api.get('posts');
+      console.log(response.data);
   }
 
   render() {
