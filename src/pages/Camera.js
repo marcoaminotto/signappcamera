@@ -13,6 +13,7 @@ export default class Camera extends Component {
     show: false,
     img: require('../assets/hand.png')
   }
+  // Função que realiza a captura da imagem
   takePicture = async() => {
     if (this.camera) {
       const options = { quality: 0.5, base64: true };
@@ -21,7 +22,7 @@ export default class Camera extends Component {
       this.setState({ img, show: false });
     }
   };
-
+  // Função que envia os dados para o servidor
   upload = () => {
     const data = new FormData();
      //pegar a imagem da store e passar para o state
@@ -55,16 +56,16 @@ export default class Camera extends Component {
           type={RNCamera.Constants.Type.back}
           flashMode={RNCamera.Constants.FlashMode.off}
           androidCameraPermissionOptions={{
-            title: 'Permission to use camera',
-            message: 'We need your permission to use your camera',
+            title: 'Permissão para usar a camera',
+            message: 'O aplicativo precisa da sua permissão para utilizar a sua camera',
             buttonPositive: 'Ok',
-            buttonNegative: 'Cancel',
+            buttonNegative: 'Cancelar',
           }}
           androidRecordAudioPermissionOptions={{
-            title: 'Permission to use audio recording',
-            message: 'We need your permission to use your audio',
+            title: 'Permissão para usar o audio',
+            message: 'O aplicativo precisa da sua permissão para utilizar o seu audio',
             buttonPositive: 'Ok',
-            buttonNegative: 'Cancel',
+            buttonNegative: 'Cancelar',
           }}
         />
         <TouchableOpacity style={styles.capture} onPress={() => this.takePicture()} />
@@ -72,8 +73,8 @@ export default class Camera extends Component {
       :
       <View style={styles.container}>
         <Image source={this.state.img} style={styles.img} />
-        <Text style={styles.button} onPress={() => this.setState({ show: true })}>Take Photo</Text>
-        <Text style={styles.button} onPress={() => this.upload()}>Upload Photo</Text>
+        <Text style={styles.button} onPress={() => this.setState({ show: true })}>Capiturar Foto</Text>
+        <Text style={styles.button} onPress={() => this.upload()}>Analisar Foto</Text>
       </View>
       ;
       
