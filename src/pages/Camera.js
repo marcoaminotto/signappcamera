@@ -28,7 +28,7 @@ export default class Camera extends Component {
      let name = new Date().getTime();
      data.append('image', {uri: this.state.img.uri, name: `${name}.png`, type: 'image/png' });
      data.append('sign',null);
-     fetch('http://192.168.25.5:3333/posts', {
+     fetch('http://192.168.25.8:1111/posts', {
       method: 'post',
       headers: {
         'Content-Type': 'multipart/form-data'
